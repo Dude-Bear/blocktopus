@@ -6,7 +6,7 @@ cg = CoinGeckoAPI()
 app = FastAPI()
 
 
-origins = ["http://localhost:3000"]
+origins = ["http://localhost:3000", "https://blocktopus-crypto-index.herokuapp.com/"]
 
 app.add_middleware(
     CORSMiddleware,
