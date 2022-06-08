@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pycoingecko import CoinGeckoAPI
+from app.api.api_v1.coins import coins_router
 
-cg = CoinGeckoAPI()
 app = FastAPI()
 
 
@@ -26,6 +25,4 @@ async def root():
     return {"message": "Hello World from the backend!"}
 
 
-@app.get("/test")
-async def get_btc_price():
-    return cg.get_price(ids="bitcoin", vs_currencies="usd")
+app.include_router(coins_router, prefix="/api/coins", tags=["coins"])

@@ -12,7 +12,11 @@ const App =() => {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch("https://blocktopus-backend.herokuapp.com/", requestOptions);
+    // for development
+    const response = await fetch("http://localhost:3000/", requestOptions); 
+
+    // // for deploment
+    // const response = await fetch("https://blocktopus-backend.herokuapp.com/", requestOptions); 
     const data = await response.json();
 
     if (!response.ok) {
