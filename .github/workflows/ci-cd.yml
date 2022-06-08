@@ -35,19 +35,27 @@ jobs:
           pip install pytest
           pytest
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: [test, build]
-  #   if: github.ref == 'refs/heads/master'
-  #   steps:
-  #     - name: pulling git repo
-  #       uses: actions/checkout@v2
-  #     - name: deploying to Heroku
-  #       uses: akhileshns/heroku-deploy@v3.12.12
-  #       with:
-  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-  #         heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-  #         heroku_email: ${{secrets.HEROKU_EMAIL}}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v2
+      - name: deploying backend to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_BACKEND}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "backend"
+      - name: deploying frontend to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_FRONTEND}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "frontend"
 
   #     # - name: deploy to ubuntu server
   #     #   uses: appleboy/ssh-action@master
