@@ -50,13 +50,13 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           # procfile: "web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}"
           appdir: "backend"
-      - name: deploying frontend to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME_FRONTEND}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: "frontend"
+      # - name: deploying frontend to Heroku
+      #   uses: akhileshns/heroku-deploy@v3.12.12
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: ${{secrets.HEROKU_APP_NAME_FRONTEND}}
+      #     heroku_email: ${{secrets.HEROKU_EMAIL}}
+      #     appdir: "frontend"
 
   #     # - name: deploy to ubuntu server
   #     #   uses: appleboy/ssh-action@master
