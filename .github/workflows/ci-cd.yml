@@ -35,10 +35,10 @@ jobs:
           pip install pytest
           pytest
 
-  deploy:
+  deploy-backend:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: pulling git repo
         uses: actions/checkout@v2
@@ -50,6 +50,13 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           # procfile: "web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}"
           appdir: "backend"
+  deploy-frontend:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v2
       - name: deploying frontend to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
