@@ -3,7 +3,6 @@ import { config } from './Constants';
 
 const URL = config.url;
 
-// dependency array
 
 const App =() => {
   const [message, setMessage] = useState("");
@@ -15,7 +14,7 @@ const App =() => {
         "Content-Type": "application/json",
       },
     };
-    // adjusted URL for development and deployment
+    // using different URLs for development and deployment
     const response = await fetch(URL, requestOptions);  
     const data = await response.json();
 
