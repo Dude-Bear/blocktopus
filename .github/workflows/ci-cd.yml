@@ -58,7 +58,6 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "frontend"
 
-
   #     # - name: deploy to ubuntu server
   #     #   uses: appleboy/ssh-action@master
   #     #   with:
