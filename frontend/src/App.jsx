@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { config } from 'Constants';
+import { config } from './Constants';
 
 const URL = config.url;
 
