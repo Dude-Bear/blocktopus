@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { config } from './Constants';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import { ThemeProvider } from './context/ThemeContext'
+import Home from './pages/Home'
+import Index from './pages/Index'
+import Coin from './pages/Coin'
+import History from './pages/History'
+import Register from './pages/Register'
+import SignIn from './pages/SignIn'
+import Learn from './pages/Learn'
 
-const URL = config.url;
 
 
-const App =() => {
-  const [message, setMessage] = useState("");
-
-  const getWelcomeMessage = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    // using different URLs for development and deployment
-    const response = await fetch(URL, requestOptions);  
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.log("something messed up");
-    } else {
-      setMessage(data.message);
-    }
-  };
-
-  useEffect(() => {
-    getWelcomeMessage();
-  }, []);
-
+function App() {
   return (
-    <div >
-     <h1>Hello World!</h1>
-     {message}
-    </div>
-  );
+    <ThemeProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/index' element={<Index />} />
+        <Route path='/Coin' element={<Coin />} />
+        <Route path='/learn' element={<Learn />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/signin' element={<SignIn />} />
+      </Routes>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
