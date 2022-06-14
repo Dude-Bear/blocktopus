@@ -1,7 +1,7 @@
 
 // urls to fetch coin data 
 const production = {
-    url: 'https://blocktopus-backend.herokuapp.com/'
+    url: 'https://blocktopus-backend.herokuapp.com'
   };
 
 const development = {
