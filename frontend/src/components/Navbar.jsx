@@ -34,7 +34,7 @@ const Navbar = () => {
         {nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20}/>}
       </div>
         {/* Mobile Menu */}
-      <div className={nav ? 'md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10'
+      <div onClick={handleNav} className={nav ? 'rounded-div md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10'
                             : 'fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-300'}>
         <ul className='w-full p-4'>
             <li className="border-b py-6">
