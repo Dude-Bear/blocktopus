@@ -8,4 +8,4 @@ coins_router = router = APIRouter()
 # TODO: shema erstellen
 @router.get("/")
 async def get_top_100():
-    return cg.get_coins_markets(vs_currency="usd")
+    return cg.get_coins_markets(vs_currency="usd", price_change_percentage="7d")

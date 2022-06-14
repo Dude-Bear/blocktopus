@@ -10,5 +10,5 @@ const development = {
 
 export const config = process.env.NODE_ENV === 'development' ? development : production;
 
-console.log("config.url:" + config.url);
-console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
+// console.log("config.url:" + config.url);
+// console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
