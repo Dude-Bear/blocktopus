@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import CoinItem from "./CoinItem";
 
-const CoinSearch = ({ topCoins }) => {
+const SearchTable = ({ topCoins }) => {
   const [searchText, setSearchText] = useState("");
   return (
     <div className="rounded-div my-4">
@@ -50,4 +50,4 @@ const CoinSearch = ({ topCoins }) => {
   );
 };
 
-export default CoinSearch;
+export default SearchTable;

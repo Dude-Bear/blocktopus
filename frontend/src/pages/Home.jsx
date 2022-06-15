@@ -1,16 +1,12 @@
 import React from "react";
-import CoinSearch from "../components/CoinSearch";
+import SearchTable from "../components/SearchTable";
 
+const Home = ({ topCoins }) => {
+  return (
+    <div>
+      <SearchTable topCoins={topCoins} />
+    </div>
+  );
+};
 
-
-const Home = ({topCoins}) => {
-   
-    return (
-
-      <div>
-        <CoinSearch topCoins={topCoins}/>
-      </div>
-    )
-}
-
-export default Home
+export default Home;
