@@ -19,18 +19,37 @@ const CoinItem = ({ coin }) => {
       <td className="w-[180px] hidden sm:table-cell">
         {coin.price_change_percentage_7d_in_currency > 0 ? (
           <p className="text-green-600">
-            {coin.price_change_percentage_7d_in_currency.toFixed(2)}%
+            {coin.price_change_percentage_7d_in_currency.toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}
+            %
           </p>
         ) : (
           <p className="text-red-600">
-            {coin.price_change_percentage_7d_in_currency.toFixed(2)}%
+            {coin.price_change_percentage_7d_in_currency.toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}
+            %
           </p>
         )}
       </td>
       <td className="w-[180px] hidden md:table-cell">
         {coin.market_cap.toLocaleString()}
       </td>
-      <td>xx.xx%</td>
+      <td>
+        {coin.mkt_share.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+      </td>
     </tr>
   );
 };

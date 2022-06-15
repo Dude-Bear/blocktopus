@@ -1,10 +1,10 @@
 import React from "react";
-import CoinSearch from "../components/SearchTable";
+import SearchTable from "../components/SearchTable";
 
 const Home = ({ topCoins }) => {
   return (
     <div>
-      <CoinSearch topCoins={topCoins} />
+      <SearchTable topCoins={topCoins} />
     </div>
   );
 };
