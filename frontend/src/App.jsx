@@ -31,7 +31,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home topCoins={topCoins} />} />
-        <Route path="/bci" element={<BCI />} />
+        <Route path="/bci" element={<BCI topCoins={topCoins} />} />
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />
