@@ -59,6 +59,7 @@ function Table({ columns, data }) {
   } = useTable({
     columns,
     data,
+    initialState: { pageIndex: 0, pageSize: 50 }
   },
     useFilters, // useFilters!
     useGlobalFilter,
