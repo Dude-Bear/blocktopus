@@ -8,7 +8,7 @@ coins_router = router = APIRouter()
 
 # TODO: shema erstellen
 @router.get("/")
-async def get_top_X(number_of_coins="10"):
+async def get_top_X(number_of_coins="100"):
     # get coindata from coingecko
     topX = cg.get_coins_markets(
         vs_currency="usd",

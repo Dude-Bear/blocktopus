@@ -22,7 +22,7 @@ const SearchTable = ({ topCoins }) => {
         <thead>
           <tr className="border-b">
             <th className="px-4">#</th>
-            <th className="text-left w-[10px]">Coin</th>
+            <th className="text-left w-20">Coin</th>
             <td> </td>
             <th className="pr-4">Price in USD</th>
             <th className="hidden sm:table-cell">7d</th>

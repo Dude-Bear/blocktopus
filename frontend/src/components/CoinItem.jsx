@@ -45,7 +45,7 @@ const CoinItem = ({ coin }) => {
         {coin.market_cap.toLocaleString()}
       </td>
       <td>
-        {coin.mkt_share.toLocaleString(undefined, {
+        {coin.market_share.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}

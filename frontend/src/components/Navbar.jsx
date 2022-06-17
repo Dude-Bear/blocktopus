@@ -17,7 +17,7 @@ const Navbar = () => {
       </Link>
       {/* Desktop Menu */}
       <div className="hidden md:block">
-        <Link to="/index" className="p-4 hover:text-accent">
+        <Link to="/bci" className="p-4 hover:text-accent">
           Index
         </Link>
         <Link to="/learn" className="p-4 hover:text-accent">
@@ -59,7 +59,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="border-b py-6">
-            <Link to="/index">Index</Link>
+            <Link to="/bci">Index</Link>
           </li>
           <li className="border-b py-6">
             <Link to="/learn">Learn</Link>

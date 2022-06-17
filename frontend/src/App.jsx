@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./pages/Home";
-import Index from "./pages/Index";
 import Coin from "./pages/Coin";
 import History from "./pages/History";
 import Register from "./pages/Register";
@@ -13,6 +12,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { config } from "./Constants";
+import BCI from "./pages/BCI";
 
 function App() {
   // using different URLs for development and deployment
@@ -31,7 +31,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home topCoins={topCoins} />} />
-        <Route path="/index" element={<Index />} />
+        <Route path="/bci" element={<BCI topCoins={topCoins} />} />
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />
