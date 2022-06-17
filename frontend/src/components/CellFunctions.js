@@ -42,17 +42,16 @@ export function SelectColumnFilter({
 }
 
 export function PercentChangeColor({ value }) {
-    // const status = value ? value.toLowerCase() : "unknown";
+    const status = value ? value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "unknown";
 
     return (
         <span
             className={classNames(
                 "text-sm",
-                value >= 0 ? " text-green-600" : null,
-                value < 0 ? " text-red-600" : null,
+                status >= 0 ? " text-green-600" : " text-red-600",
             )}
         >
-            {value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}%
+            {status}%
         </span>
     );
 }
