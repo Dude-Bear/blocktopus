@@ -15,7 +15,7 @@ export const COLUMNS =  [
       {
         Header: "Price in USD",
         accessor: "current_price",
-        Cell: ValueToLocalStringWithTwoDigits,
+        Cell: ValueToLocalString,
       },
       {
         Header: "7d",
