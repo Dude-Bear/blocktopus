@@ -59,6 +59,7 @@ function Table({ columns, data }) {
   } = useTable({
     columns,
     data,
+    initialState: { pageIndex: 0, pageSize: 50 }
   },
     useFilters, // useFilters!
     useGlobalFilter,
@@ -159,7 +160,7 @@ function Table({ columns, data }) {
         </div>
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div className="flex gap-x-2 items-baseline">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm">
               Page <span className="font-medium">{state.pageIndex + 1}</span> of <span className="font-medium">{pageOptions.length}</span>
             </span>
             <label>
@@ -171,7 +172,7 @@ function Table({ columns, data }) {
                   setPageSize(Number(e.target.value))
                 }}
               >
-                {[5, 10, 20].map(pageSize => (
+                {[50, 100, 250].map(pageSize => (
                   <option key={pageSize} value={pageSize}>
                     Show {pageSize}
                   </option>
@@ -187,21 +188,21 @@ function Table({ columns, data }) {
                 disabled={!canPreviousPage}
               >
                 <span className="sr-only">First</span>
-                <ChevronDoubleLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronDoubleLeftIcon className="h-5 w-5 " aria-hidden="true" />
               </PageButton>
               <PageButton
                 onClick={() => previousPage()}
                 disabled={!canPreviousPage}
               >
                 <span className="sr-only">Previous</span>
-                <ChevronLeftIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronLeftIcon className="h-5 w-5 " aria-hidden="true" />
               </PageButton>
               <PageButton
                 onClick={() => nextPage()}
                 disabled={!canNextPage
                 }>
                 <span className="sr-only">Next</span>
-                <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
               </PageButton>
               <PageButton
                 className="rounded-r-md"
@@ -209,7 +210,7 @@ function Table({ columns, data }) {
                 disabled={!canNextPage}
               >
                 <span className="sr-only">Last</span>
-                <ChevronDoubleRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronDoubleRightIcon className="h-5 w-5 " aria-hidden="true" />
               </PageButton>
             </nav>
           </div>

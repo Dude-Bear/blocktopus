@@ -58,17 +58,21 @@ export function PercentChangeColor({ value }) {
 ;
 
 export function ValueToLocalString ({value}){
+    const status = value ? value.toLocaleString() : "unknown";
+
     return (
         <span className={classNames("text-sm")}>
-            {value.toLocaleString()}
+            {status}
         </span>
     );
 }
 
 export function ValueToLocalStringWithTwoDigits ({value}){
+    const status = value ? value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "unknown";
+
     return (
         <span className={classNames("text-sm")}>
-            {value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            {status}
         </span>
     );
 }
