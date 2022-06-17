@@ -15,31 +15,22 @@ const CoinItem = ({ coin }) => {
         </div>
       </td>
       <td>{coin.symbol.toUpperCase()}</td>
-      <td>${coin.current_price.toLocaleString()}</td>
+      <td>
+        $
+        {coin.current_price
+          ? coin.current_price.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          : "unknown"}
+      </td>
       <td className="w-[180px] hidden sm:table-cell">
-        {coin.price_change_percentage_7d_in_currency > 0 ? (
-          <p className="text-green-600">
-            {coin.price_change_percentage_7d_in_currency.toLocaleString(
+        {coin.price_change_percentage_7d_in_currency
+          ? coin.price_change_percentage_7d_in_currency.toLocaleString(
               undefined,
-              {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }
-            )}
-            %
-          </p>
-        ) : (
-          <p className="text-red-600">
-            {coin.price_change_percentage_7d_in_currency.toLocaleString(
-              undefined,
-              {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }
-            )}
-            %
-          </p>
-        )}
+              { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+            )
+          : "unknown"}
       </td>
       <td className="w-[180px] hidden md:table-cell">
         {coin.market_cap.toLocaleString()}
