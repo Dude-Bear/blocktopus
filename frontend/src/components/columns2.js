@@ -4,6 +4,7 @@ export const COLUMNS =  [
       {
         Header: "#",
         accessor: "market_cap_rank",
+        sticky: 'left',
       },
       {
         Header: "Coin",
@@ -11,6 +12,7 @@ export const COLUMNS =  [
         Cell: CoinCell,
         imgAccessor: "image",
         symbolAccessor: "symbol",
+        sticky: 'left',
       },
       {
         Header: "Price in USD",
