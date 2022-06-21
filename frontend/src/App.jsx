@@ -13,6 +13,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { config } from "./Constants";
 import BCI from "./pages/BCI";
+import PersonalIndex from "./pages/PersonalIndex";
 
 function App() {
   // using different URLs for development and deployment
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home topCoins={topCoins} />} />
         <Route path="/bci" element={<BCI topCoins={topCoins} />} />
+        <Route path="/personal-index" element={<PersonalIndex />} />
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />

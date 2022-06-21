@@ -1,8 +1,9 @@
 import React from 'react'
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table'
+import { useTable, useRowSelect, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table'
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
 import { Button, PageButton } from './shared/Button'
 import { SortIcon, SortUpIcon, SortDownIcon } from './shared/Icons'
+import { Checkbox } from './Checkbox'
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -43,7 +44,6 @@ function Table({ columns, data }) {
     page, // Instead of using 'rows', we'll use page,
     // which has only the rows for the active page
 
-    // The rest of these things are super handy, too ;)
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -52,19 +52,32 @@ function Table({ columns, data }) {
     nextPage,
     previousPage,
     setPageSize,
-
     state,
     preGlobalFilteredRows,
     setGlobalFilter,
+    selectedFlatRows,
   } = useTable({
     columns,
     data,
     initialState: { pageIndex: 0, pageSize: 50 }
   },
-    useFilters, // useFilters!
+    useFilters, 
     useGlobalFilter,
     useSortBy,
-    usePagination,  // new
+    usePagination, 
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push(columns => [
+        {
+          id: 'selection',
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          ),
+          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+        },
+        ...columns
+      ])
+    }
   )
 
   // Render the UI for your table
@@ -216,6 +229,17 @@ function Table({ columns, data }) {
           </div>
         </div>
       </div>
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              selectedFlatRows: selectedFlatRows.map(row => row.original)
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
     </>
   )
 }
