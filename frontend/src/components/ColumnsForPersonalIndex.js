@@ -1,4 +1,4 @@
-import { CoinCell, HideOnSmallDevices, PercentChangeColor, ValueToLocalString, ValueToLocalStringWithFourDigits, ValueToLocalStringWithTwoDigits } from "./CellFunctions";
+import { CoinCell,ValueToLocalString,ValueToLocalStringWithTwoDigits } from "./CellFunctions";
 
 export const COLUMNS =  [
       // with the hide method used here, the column space is still there
@@ -20,7 +20,7 @@ export const COLUMNS =  [
         Cell: ValueToLocalString,
       },
       {
-        Header: "Personal Index Market Share",
+        Header: "Share of Index",
         accessor: "personal_index_market_share",
         Cell: ValueToLocalStringWithTwoDigits,
       },

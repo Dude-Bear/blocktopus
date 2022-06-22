@@ -4,30 +4,19 @@ import Table from "../components/Table";
 import TableForPersonalIndex from "../components/TableForPersonalIndex";
 
 const PersonalIndex = (selectedRows) => {
-  const data = [];
+  const dataForPersonalIndex = [];
   let personalIndexMktCap = 0;
 
   for (let i of selectedRows.selectedRows) {
-    data.push(i.original);
+    dataForPersonalIndex.push(i.original);
     personalIndexMktCap += i.original.market_cap;
   }
 
-  for (let i of data) {
+  for (let i of dataForPersonalIndex) {
     i.personal_index_market_share = (i.market_cap / personalIndexMktCap) * 100;
+    i.personal_index_market_cap = personalIndexMktCap;
   }
 
-  // def add_mkt_share(mktData):
-  // totalMktCap = 0
-  // for coin in mktData:
-  //     totalMktCap += coin["market_cap"]
-
-  // for coin in mktData:
-  //     coin["market_share"] = coin["market_cap"] / totalMktCap * 100
-
-  // return mktData
-
-  console.log(personalIndexMktCap);
-  console.log(data);
   const columns = useMemo(() => COLUMNS, []);
 
   return (
@@ -37,7 +26,10 @@ const PersonalIndex = (selectedRows) => {
           <div className="mt-3">
             <h1>Personal Index</h1>
 
-            <TableForPersonalIndex columns={columns} data={data} />
+            <TableForPersonalIndex
+              columns={columns}
+              data={dataForPersonalIndex}
+            />
           </div>
         </main>
       </div>
