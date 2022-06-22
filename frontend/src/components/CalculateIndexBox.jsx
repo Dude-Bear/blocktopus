@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 const CalculateIndexBox = (selectedRows) => {
   let mkt = 0;
 
-  console.log(selectedRows.selectedRows);
-
   try {
-    console.log(selectedRows.selectedRows[0].personal_index_market_cap);
     mkt = selectedRows.selectedRows[0].personal_index_market_cap;
   } catch (error) {}
 
@@ -15,8 +12,8 @@ const CalculateIndexBox = (selectedRows) => {
     <div className="w-80 m-auto mb-5">
       <div className=" rounded-div ">
         <h3 className="mt-2 mx-6 ">
-          Index Market Cap:{" "}
-          <span className="font-bold text-xl">{mkt.toLocaleString()}</span>
+          <span className="block">Index Market Cap:</span>
+          <span className="font-bold text-2xl">{mkt.toLocaleString()}</span>
         </h3>
         <h3 className="mt-3 mx-6 text-xs">Amount to be invested</h3>
 
