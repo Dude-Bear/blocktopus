@@ -20,6 +20,7 @@ function App() {
   const BackendURL = config.url;
 
   const [topCoins, setCoins] = useState([]);
+  const [selectedRows, setSelectedRows] = React.useState({});
 
   useEffect(() => {
     axios.get(BackendURL + "/api/coins").then((response) => {
@@ -32,8 +33,16 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home topCoins={topCoins} />} />
-        <Route path="/bci" element={<BCI topCoins={topCoins} />} />
-        <Route path="/personal-index" element={<PersonalIndex />} />
+        <Route
+          path="/bci"
+          element={
+            <BCI topCoins={topCoins} setSelectedRows={setSelectedRows} />
+          }
+        />
+        <Route
+          path="/personal-index"
+          element={<PersonalIndex selectedRows={selectedRows} />}
+        />
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />

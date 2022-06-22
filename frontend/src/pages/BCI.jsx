@@ -3,7 +3,7 @@ import CalculateIndexBox from "../components/CalculateIndexBox";
 import { COLUMNS } from "../components/columns2";
 import Table from "../components/Table.js";
 
-function BCI({ topCoins }) {
+function BCI({ topCoins, setSelectedRows }) {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => topCoins, [topCoins]);
 
@@ -12,7 +12,11 @@ function BCI({ topCoins }) {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="mt-3">
           <CalculateIndexBox totalMarketCap={34} />
-          <Table columns={columns} data={data} />
+          <Table
+            columns={columns}
+            data={data}
+            onRowSelectStateChange={setSelectedRows}
+          />
         </div>
       </main>
     </div>
