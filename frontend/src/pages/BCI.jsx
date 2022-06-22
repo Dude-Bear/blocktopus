@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import CalculateIndexBox from "../components/CalculateIndexBox";
 import { COLUMNS } from "../components/columns2";
-import Table from "../components/Table.js";
+import Table from "../components/Table.jsx";
 
 function BCI({ topCoins, setSelectedRows }) {
   const columns = useMemo(() => COLUMNS, []);

@@ -77,6 +77,16 @@ export function ValueToLocalStringWithTwoDigits ({value}){
     );
 }
 
+export function ValueToLocalStringWithFourDigits ({value}){
+    const status = value ? value.toLocaleString(undefined, {minimumFractionDigits: 4, maximumFractionDigits: 4}) : "unknown";
+
+    return (
+        <span className={classNames("text-sm")}>
+            {status}
+        </span>
+    );
+}
+
 export function HideOnSmallDevices ({value}){
     const status = value ? value.toLocaleString() : "unknown";
 
