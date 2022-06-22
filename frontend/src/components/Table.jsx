@@ -17,6 +17,7 @@ import {
 import { Button, PageButton } from "./shared/Button";
 import { SortIcon, SortUpIcon, SortDownIcon } from "./shared/Icons";
 import { Checkbox } from "./Checkbox";
+import { prepareData } from "../pages/prepareData";
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -96,7 +97,7 @@ function Table({ columns, data, onRowSelectStateChange }) {
 
   // get selected rows when state changes
   React.useEffect(
-    () => onRowSelectStateChange?.(selectedFlatRows),
+    () => onRowSelectStateChange?.(prepareData(selectedFlatRows)),
     [onRowSelectStateChange, selectedFlatRows]
   );
 

@@ -36,7 +36,11 @@ function App() {
         <Route
           path="/bci"
           element={
-            <BCI topCoins={topCoins} setSelectedRows={setSelectedRows} />
+            <BCI
+              topCoins={topCoins}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
           }
         />
         <Route
