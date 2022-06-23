@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 const CalculateIndexBox = (selectedRows) => {
   let mkt = 0;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   try {
     mkt = selectedRows.selectedRows[0].personal_index_market_cap;
@@ -18,19 +27,41 @@ const CalculateIndexBox = (selectedRows) => {
         <h3 className="mt-3 mx-6 text-xs">Amount to be invested</h3>
 
         <div className="flex mx-6">
-          <div>
+          {/* <div>
             <input
               type="text"
               className="my-2 p-3 mr-2 w-28 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               placeholder="1.000"
             />
-          </div>
+          </div> */}
           <div>
-            <Link to="/personal-index">
-              <button className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28">
+            {/* <button className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28">
                 Calculate
-              </button>
-            </Link>
+              </button> */}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                className="my-2 p-3 mr-2 w-28 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="1.000"
+                {...register("singleErrorInput", {
+                  required: "This field is required",
+                })}
+              />
+
+              <input
+                value="Calculate"
+                type="submit"
+                className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28"
+              />
+            </form>
+            <div>
+              <ErrorMessage
+                errors={errors}
+                name="singleErrorInput"
+                as="p"
+                class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                role="alert"
+              />
+            </div>
           </div>
         </div>
       </div>
