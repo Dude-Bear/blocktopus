@@ -1,4 +1,4 @@
-import { CoinCell, HideOnSmallDevices, PercentChangeColor, ValueToLocalString, ValueToLocalStringWithTwoDigits } from "./CellFunctions";
+import { CoinCell, PercentChangeColor, ValueToLocalString, ValueToLocalStringWithTwoDigits } from "./CellFunctions";
 
 export const COLUMNS =  [
       // with the hide method used here, the column space is still there
