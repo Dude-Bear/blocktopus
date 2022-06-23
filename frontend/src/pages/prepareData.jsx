@@ -1,8 +1,8 @@
-export function prepareData(selectedRows) {
+export function prepareData(props) {
   const dataForPersonalIndex = [];
   let personalIndexMktCap = 0;
 
-  for (let i of selectedRows) {
+  for (let i of props) {
     dataForPersonalIndex.push(i.original);
     personalIndexMktCap += i.original.market_cap;
   }

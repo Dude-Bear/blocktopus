@@ -1,17 +1,18 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
 const CalculateIndexBox = (selectedRows) => {
   let mkt = 0;
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => navigate("/personal-index", { state: { data } });
 
   try {
     mkt = selectedRows.selectedRows[0].personal_index_market_cap;
@@ -42,7 +43,7 @@ const CalculateIndexBox = (selectedRows) => {
               <input
                 className="my-2 p-3 mr-2 w-28 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="1.000"
-                {...register("singleErrorInput", {
+                {...register("amount", {
                   required: "This field is required",
                 })}
               />
@@ -53,10 +54,11 @@ const CalculateIndexBox = (selectedRows) => {
                 className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28"
               />
             </form>
+            {selectedRows.selectedRows.length < 1 && <h2>error.</h2>}
             <div>
               <ErrorMessage
                 errors={errors}
-                name="singleErrorInput"
+                name="amount"
                 as="p"
                 class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                 role="alert"

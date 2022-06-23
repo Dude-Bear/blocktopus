@@ -24,9 +24,9 @@ export const COLUMNS =  [
         accessor: "personal_index_market_share",
         Cell: ValueToLocalStringWithTwoDigits,
       },
-      // {
-      //   Header: "Amount to Invest",
-      //   accessor: "personal_index_market_share",
-      //   Cell: ValueToLocalStringWithTwoDigits,
-      // },
+      {
+        Header: "Amount to Invest",
+        accessor: "proportion_invested",
+        Cell: ValueToLocalStringWithTwoDigits,
+      },
     ]
