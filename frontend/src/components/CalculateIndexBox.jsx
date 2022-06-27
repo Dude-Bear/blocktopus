@@ -28,17 +28,7 @@ const CalculateIndexBox = (selectedRows) => {
         <h3 className="mt-3 mx-6 text-xs">Amount to be invested</h3>
 
         <div className="flex mx-6">
-          {/* <div>
-            <input
-              type="text"
-              className="my-2 p-3 mr-2 w-28 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              placeholder="1.000"
-            />
-          </div> */}
           <div>
-            {/* <button className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28">
-                Calculate
-              </button> */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 className="my-2 p-3 mr-2 w-28 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -54,7 +44,9 @@ const CalculateIndexBox = (selectedRows) => {
                 className="my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl font-bold w-28"
               />
             </form>
-            {selectedRows.selectedRows.length < 1 && <h2>error.</h2>}
+            {selectedRows.selectedRows.length < 1 && (
+              <p class=" mb-4 text-xs">Please select at least one Coin </p>
+            )}
             <div>
               <ErrorMessage
                 errors={errors}
