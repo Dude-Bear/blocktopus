@@ -8,9 +8,9 @@ from .db.database import Base
 class Coin(Base):
     __tablename__ = "coins"
     coin_id = Column(Integer, primary_key=True, nullable=False)
-    symbol = Column(String(256), index=True, nullable=True)
-    name = Column(String(256), index=True, nullable=True)
-    image = Column(String(256), index=True, nullable=True)
+    symbol = Column(String(256), nullable=False)
+    name = Column(String(256), nullable=False)
+    image = Column(String(256), nullable=False)
     last_updated = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
@@ -23,12 +23,12 @@ class Consists_Of(Base):
     __tablename__ = "consists_of"
     user_id = Column(
         Integer,
-        ForeignKey("models.coin.coin_id", ondelete="CASCADE"),
+        ForeignKey("coins.coin_id", ondelete="CASCADE"),
         primary_key=True,
     )
     index_id = Column(
         Integer,
-        ForeignKey("models.index.index_id", ondelete="CASCADE"),
+        ForeignKey("indices.index_id", ondelete="CASCADE"),
         primary_key=True,
     )
 
@@ -39,7 +39,7 @@ class Index(Base):
     __tablename__ = "indices"
     index_id = Column(Integer, primary_key=True, index=True)
     user_id = Column(
-        Integer, ForeignKey("models.user.id", ondelete="CASCADE"), nullable=False
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
     created_at = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
