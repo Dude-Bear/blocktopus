@@ -1,8 +1,23 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.api_v1.coins import coins_router
 
+from sqlalchemy.orm import Session
+
+from . import models
+from .db.database import engine, SessionLocal
+
+models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 origins = [
@@ -23,6 +38,11 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Hello World from the backend!"}
+
+
+@app.get("/sqlalchemy")
+async def test_posts(db: Session = Depends(get_db)):
+    return {"STATUS": "SUCCESS"}
 
 
 app.include_router(coins_router, prefix="/api/coins", tags=["coins"])
