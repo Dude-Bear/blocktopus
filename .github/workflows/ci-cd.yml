@@ -3,7 +3,7 @@ name: Build and Deploy Code
 on:
   push:
 
-env:
+ env:
   DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
   DATABASE_PORT: ${{secrets.DATABASE_PORT}}
   DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
@@ -14,22 +14,22 @@ env:
   ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
 
 jobs:
-  postgres:
-    image: postgres
-    env:
-      POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-      POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
-    ports:
-      - 5432:5432
-    options: >-
-      --health-cmd pg_isready
-      --health-interval 10s
-      --health-timeout 5s
-      --health-retries 5
-
   test:
+   
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     runs-on: ubuntu-latest
-    needs: [postgres]
     strategy:
       matrix:
         python-version: ["3.10"]
