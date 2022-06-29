@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, Numeric, String, Boolean, ForeignKey
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 
@@ -14,14 +14,14 @@ class Coin(Base):
     last_updated = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
-    circulating_supply = Column(Integer, nullable=False)
-    market_cap = Column(Integer, nullable=False)
-    current_price = Column(Integer, nullable=False)
+    circulating_supply = Column(Numeric, nullable=False)
+    market_cap = Column(Numeric, nullable=False)
+    current_price = Column(Numeric, nullable=False)
 
 
 class Consists_Of(Base):
     __tablename__ = "consists_of"
-    user_id = Column(
+    coin_id = Column(
         Integer,
         ForeignKey("coins.coin_id", ondelete="CASCADE"),
         primary_key=True,
@@ -32,7 +32,7 @@ class Consists_Of(Base):
         primary_key=True,
     )
 
-    amount_of_coin = Column(Integer, nullable=False)
+    amount_of_coin = Column(Numeric, nullable=False)
 
 
 class Index(Base):
@@ -44,7 +44,7 @@ class Index(Base):
     created_at = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
-    index_name = Column(String(256), nullable=True)
+    index_name = Column(String(256), nullable=True, default="My Index")
 
 
 class User(Base):

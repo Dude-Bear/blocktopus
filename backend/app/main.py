@@ -42,7 +42,8 @@ async def root():
 
 @app.get("/sqlalchemy")
 async def test_posts(db: Session = Depends(get_db)):
-    return {"STATUS": "SUCCESS"}
+    users = db.query(models.User).all()
+    return {"users": users}
 
 
 app.include_router(coins_router, prefix="/api/coins", tags=["coins"])
