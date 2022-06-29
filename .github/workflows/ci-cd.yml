@@ -15,11 +15,6 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-
     services:
       postgres:
         image: postgres
@@ -33,6 +28,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
 
     steps:
       - name: pulling git repo
