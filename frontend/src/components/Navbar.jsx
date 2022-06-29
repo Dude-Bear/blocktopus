@@ -56,19 +56,27 @@ const Navbar = () => {
       >
         <ul className="w-full p-4">
           <li className="border-b py-6">
-            <Link to="/">Home</Link>
+            <Link className="block" to="/">
+              Home
+            </Link>
           </li>
           <li className="border-b py-6">
-            <Link to="/bci">Index</Link>
+            <Link className="block" to="/bci">
+              Index
+            </Link>
           </li>
           <li className="border-b py-6">
-            <Link to="/learn">Learn</Link>
+            <Link className="block" to="/learn">
+              Learn
+            </Link>
           </li>
           <li className="border-b py-6">
-            <Link to="/history">History</Link>
+            <Link className="block" to="/history">
+              History
+            </Link>
           </li>
           <li className="py-6 border-b">
-            <ThemeToggle />
+            <ThemeToggle className="block" />
           </li>
         </ul>
         <div className="flex flex-col w-full p-4">

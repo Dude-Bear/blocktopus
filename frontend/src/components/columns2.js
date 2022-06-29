@@ -1,10 +1,12 @@
 import { CoinCell, PercentChangeColor, ValueToLocalString, ValueToLocalStringWithTwoDigits } from "./CellFunctions";
 
 export const COLUMNS =  [
-      {
-        Header: "#",
-        accessor: "market_cap_rank",
-      },
+      // with the hide method used here, the column space is still there
+      // {
+      //   Header:<th className="hidden sm:table-cell">#</th>,
+      //   accessor: "market_cap_rank",
+      //   Cell: HideOnSmallDevices,
+      // },
       {
         Header: "Coin",
         accessor: "name",

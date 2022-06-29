@@ -77,6 +77,26 @@ export function ValueToLocalStringWithTwoDigits ({value}){
     );
 }
 
+export function ValueToLocalStringWithFourDigits ({value}){
+    const status = value ? value.toLocaleString(undefined, {minimumFractionDigits: 4, maximumFractionDigits: 4}) : "unknown";
+
+    return (
+        <span className={classNames("text-sm")}>
+            {status}
+        </span>
+    );
+}
+
+export function HideOnSmallDevices ({value}){
+    const status = value ? value.toLocaleString() : "unknown";
+
+    return (
+        <span className={classNames("hidden sm:table-cell")}>
+            {status}
+        </span>
+    );
+}
+
 export function CoinCell({ value, column, row }) {
     return (
         <div className="flex items-center">
@@ -89,4 +109,6 @@ export function CoinCell({ value, column, row }) {
             </div>
         </div>
     );
+
+
 }

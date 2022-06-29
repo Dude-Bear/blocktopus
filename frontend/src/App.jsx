@@ -13,12 +13,14 @@ import axios from "axios";
 import { useEffect } from "react";
 import { config } from "./Constants";
 import BCI from "./pages/BCI";
+import PersonalIndex from "./pages/PersonalIndex";
 
 function App() {
   // using different URLs for development and deployment
   const BackendURL = config.url;
 
   const [topCoins, setCoins] = useState([]);
+  const [selectedRows, setSelectedRows] = React.useState({});
 
   useEffect(() => {
     axios.get(BackendURL + "/api/coins").then((response) => {
@@ -31,7 +33,20 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home topCoins={topCoins} />} />
-        <Route path="/bci" element={<BCI topCoins={topCoins} />} />
+        <Route
+          path="/bci"
+          element={
+            <BCI
+              topCoins={topCoins}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
+          }
+        />
+        <Route
+          path="/personal-index"
+          element={<PersonalIndex selectedRows={selectedRows} />}
+        />
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />
