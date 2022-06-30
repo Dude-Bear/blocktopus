@@ -8,7 +8,7 @@ cg = CoinGeckoAPI()
 
 coins_router = router = APIRouter()
 
-# TODO: shema erstellen
+
 @router.get("/", response_model=List[shemas.Coin])
 async def get_top_X(number_of_coins="500"):
     # get coindata from coingecko
