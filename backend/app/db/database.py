@@ -17,3 +17,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # the models in the models folder use the base_class.py -> the models in models.py
 # use this Base (later I have to choose a method)
 Base = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

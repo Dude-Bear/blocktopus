@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.api_v1.coins import coins_router
+from app.api.api_v1.index import index_router
 
 from sqlalchemy.orm import Session
 
@@ -47,3 +48,4 @@ async def test_posts(db: Session = Depends(get_db)):
 
 
 app.include_router(coins_router, prefix="/api/coins", tags=["coins"])
+app.include_router(index_router, prefix="/api/index", tags=["index"])

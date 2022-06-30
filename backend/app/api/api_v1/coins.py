@@ -10,7 +10,7 @@ coins_router = router = APIRouter()
 
 
 @router.get("/", response_model=List[shemas.Coin])
-async def get_top_X(number_of_coins="500"):
+async def get_top_X(number_of_coins="250"):
     # get coindata from coingecko
     topX = cg.get_coins_markets(
         vs_currency="usd",
