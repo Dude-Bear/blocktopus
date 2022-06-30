@@ -32,6 +32,7 @@ class Index(Base):
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
     index_name = Column(String(256), nullable=True, default="My Index")
+    total_investment = Column(Numeric, nullable=False)
 
 
 class User(Base):
