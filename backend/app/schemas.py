@@ -36,6 +36,10 @@ class Index(BaseModel):
     list_of_coins: List[CoinEntryForIndex]
 
 
+class History(BaseModel):
+    list_of_indizes: List[Index]
+
+
 class User(BaseModel):
     email: str
     password: str
