@@ -1,5 +1,5 @@
 from typing import Any
-from fastapi import APIRouter, Depends, status, HTTPException, Response
+from fastapi import APIRouter, Depends, status, HTTPException
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
@@ -8,13 +8,13 @@ from ...core import security
 from ...db.database import get_db
 
 from ... import models
-from ... import shemas
+from ... import schemas
 
 
 auth_router = router = APIRouter()
 
 
-@router.post("/login", response_model=shemas.Token)
+@router.post("/login", response_model=schemas.Token)
 def login(
     user_credentials: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
@@ -44,12 +44,12 @@ def login(
 
 
 @router.post(
-    "/signup", response_model=shemas.UserOut, status_code=status.HTTP_201_CREATED
+    "/signup", response_model=schemas.UserOut, status_code=status.HTTP_201_CREATED
 )
 def create_user_signup(
     *,
     db: Session = Depends(get_db),
-    user_data_in: shemas.User,
+    user_data_in: schemas.User,
 ) -> Any:
     """
     Create new user without the need to be logged in.

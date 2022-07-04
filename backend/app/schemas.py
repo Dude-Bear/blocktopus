@@ -9,7 +9,7 @@ class CoinBase(BaseModel):
     id: str
     symbol: str
     name: str
-    image: HttpUrl
+    image: str
     current_price: float
     market_cap: float
 
