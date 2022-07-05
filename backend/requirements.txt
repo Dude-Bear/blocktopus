@@ -33,6 +33,7 @@ pyparsing==3.0.9
 pytest==7.1.2
 python-dotenv==0.20.0
 python-jose==3.3.0
+python-multipart==0.0.5
 requests==2.27.1
 responses==0.21.0
 rsa==4.8
