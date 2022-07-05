@@ -22,11 +22,17 @@ class Coin(CoinBase):
     price_change_percentage_7d_in_currency: Optional[float]
     market_share: Optional[float]
 
+    class Config:
+        orm_mode = True
+
 
 # Additional information that can be sent per post request when creating a new index
 class CoinEntryForIndex(CoinBase):
     proportion_invested: Optional[float]
     personal_index_market_share: Optional[float]
+
+    class Config:
+        orm_mode = True
 
 
 class Index(BaseModel):
@@ -35,9 +41,15 @@ class Index(BaseModel):
     total_investment: Optional[float]
     list_of_coins: List[CoinEntryForIndex]
 
+    class Config:
+        orm_mode = True
+
 
 class History(BaseModel):
     list_of_indizes: List[Index]
+
+    class Config:
+        orm_mode = True
 
 
 class User(BaseModel):

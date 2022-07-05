@@ -1,11 +1,8 @@
-from typing import Any, List, Optional
-from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
-from pycoingecko import CoinGeckoAPI  # https://github.com/man-c/pycoingecko
-from app.utilities.calculations import add_mkt_share
+from typing import Any
+from fastapi import status, Depends, APIRouter
 from app import schemas
 from sqlalchemy.orm import Session
 from app.db.database import get_db
-from app.schemas import History
 
 from ... import models
 from ...core.auth import get_current_user
@@ -41,34 +38,3 @@ def create_index(
         db.refresh(new_coin_entry)
 
     return index_in
-
-
-@router.get("/my-history/", status_code=status.HTTP_200_OK)
-def get_indizes_for_user(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-    limit: int = 10,
-    skip: int = 0,
-    search: Optional[str] = "",
-) -> Any:
-    """
-    Get all indizes for a user
-    """
-    # TODO: abfrage so modifizieren, dass nur die eigenen indizes angezeigt werden
-
-    indizes = (
-        db.query(models.Index)
-        .join(models.Coin, models.Index.index_id == models.Coin.index_id, isouter=True)
-        .group_by(models.Index.index_id)
-        .filter(models.Index.index_name.contains(search))
-        .limit(limit)
-        .offset(skip)
-        .all()
-    )
-
-    print(indizes)
-
-    if not indizes:
-        return {"results": "NONE"}
-
-    return indizes
