@@ -9,10 +9,10 @@ from app.schemas import History
 from app.crud import get_indizes
 from app.crud import get_coin
 from app import schemas
+from app.api.deps import get_current_user
 
 from tests import test_answers
 from ... import models
-from ...core.auth import get_current_user
 
 history_router = router = APIRouter()
 
@@ -28,7 +28,7 @@ def get_indizes_for_user(
     search: Optional[str] = "",
 ) -> Any:
     """
-    Get all indizes for a user
+    Get all indizes for current user
     """
 
     history = {}

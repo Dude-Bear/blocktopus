@@ -3,9 +3,9 @@ from fastapi import status, Depends, APIRouter
 from app import schemas
 from sqlalchemy.orm import Session
 from app.db.database import get_db
+from app.api.deps import get_current_user
 
 from ... import models
-from ...core.auth import get_current_user
 
 
 index_router = router = APIRouter()

@@ -3,6 +3,8 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
+from app.api import deps
+
 from ...core import auth
 from ...core import security
 from ...db.database import get_db
@@ -46,10 +48,10 @@ def login(
 @router.post(
     "/signup", response_model=schemas.UserOut, status_code=status.HTTP_201_CREATED
 )
-def create_user_signup(
+def create_user(
     *,
     db: Session = Depends(get_db),
-    user_data_in: schemas.User,
+    user_data_in: schemas.UserCreate,
 ) -> Any:
     """
     Create new user without the need to be logged in.
@@ -67,13 +69,20 @@ def create_user_signup(
     hashed_password = security.get_password_hash(user_data_in.password)
     user_data_in.password = hashed_password
 
-    print(user_data_in)
-
     new_user = models.User(**user_data_in.dict())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
-    print(new_user.__dict__)
-
     return new_user
+
+
+@router.get("/me", response_model=schemas.UserOut)
+async def get_user_me(current_user: models.User = Depends(deps.get_current_user)):
+    """
+    Fetch the current logged in user.
+    """
+    print("hier")
+    print(current_user.__dict__)
+    user = current_user
+    return user

@@ -54,9 +54,17 @@ class History(BaseModel):
 
 class User(BaseModel):
     email: str
+
+    class Config:
+        orm_mode = True
+
+
+# Properties to receive via API on creation
+class UserCreate(User):
     password: str
 
 
+# Additional properties to return via API
 class UserOut(User):
     user_id: int
     created_at: datetime
@@ -68,7 +76,3 @@ class UserOut(User):
 class Token(BaseModel):
     access_token: str
     token_type: str
-
-
-class TokenData(BaseModel):
-    id: Optional[str] = None
