@@ -5,28 +5,26 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./pages/Home";
 import Coin from "./pages/Coin";
 import History from "./pages/History";
-import Register from "./pages/Register";
+import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Learn from "./pages/Learn";
 import { useState } from "react";
-import axios from "axios";
+import axios from "./api/axios";
 import { useEffect } from "react";
-import { config } from "./Constants";
 import BCI from "./pages/BCI";
 import PersonalIndex from "./pages/PersonalIndex";
 
 function App() {
-  // using different URLs for development and deployment
-  const BackendURL = config.url;
+  const COINS_URL = "/api/coins";
 
   const [topCoins, setCoins] = useState([]);
   const [selectedRows, setSelectedRows] = React.useState({});
 
   useEffect(() => {
-    axios.get(BackendURL + "/api/coins").then((response) => {
+    axios.get(COINS_URL).then((response) => {
       setCoins(response.data);
     });
-  }, [BackendURL]);
+  }, [COINS_URL]);
 
   return (
     <ThemeProvider>
@@ -50,7 +48,7 @@ function App() {
         <Route path="/Coin" element={<Coin />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/history" element={<History />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>
     </ThemeProvider>
