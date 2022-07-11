@@ -41,11 +41,13 @@ const SignIn = () => {
       // console.log(JSON.stringify(response?.data));
 
       const accessToken = response.data.access_token;
+      const user_id = response.data.user_id;
+
       // console.log("token");
       // console.log(accessToken);
       // const roles = response?.data?.roles;
       const roles = [2001];
-      setAuth({ username, password, roles, accessToken });
+      setAuth({ username, user_id, roles, accessToken });
       setUser("");
       setPwd("");
       navigate(from, { replace: true });
