@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import BCI from "./pages/BCI";
 import PersonalIndex from "./pages/PersonalIndex";
 import Missing from "./pages/Missing";
+import RequireAuth from "./components/RequireAuth";
 
 const ROLES = {
   User: 2001,
