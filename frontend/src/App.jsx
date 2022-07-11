@@ -17,6 +17,12 @@ import RequireAuth from "./components/RequireAuth";
 import Layout from "./components/Layout";
 import Missing from "./pages/Missing";
 
+const ROLES = {
+  User: 2001,
+  Editor: 1984,
+  Admin: 5150,
+};
+
 function App() {
   const COINS_URL = "/api/coins";
 
@@ -55,7 +61,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
 
           {/* protected routes */}
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/history" element={<History />} />
           </Route>
 

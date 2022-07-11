@@ -7,7 +7,7 @@ import axios from "../api/axios";
 const LOGIN_URL = "api/auth/login";
 
 const SignIn = () => {
-  const { setAuth } = useAuth;
+  const { setAuth } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -41,7 +41,8 @@ const SignIn = () => {
       console.log(JSON.stringify(response?.data));
       console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
+      // const roles = response?.data?.roles;
+      const roles = "2001";
       setAuth({ username, password, roles, accessToken });
       setUser("");
       setPwd("");
