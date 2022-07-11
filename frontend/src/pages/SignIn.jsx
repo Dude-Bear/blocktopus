@@ -38,11 +38,13 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(LOGIN_URL, data, headers);
-      console.log(JSON.stringify(response?.data));
-      console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
+      // console.log(JSON.stringify(response?.data));
+
+      const accessToken = response.data.access_token;
+      // console.log("token");
+      // console.log(accessToken);
       // const roles = response?.data?.roles;
-      const roles = "2001";
+      const roles = [2001];
       setAuth({ username, password, roles, accessToken });
       setUser("");
       setPwd("");
