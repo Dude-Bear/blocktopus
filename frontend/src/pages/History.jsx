@@ -9,13 +9,11 @@ function History() {
   const authData = useAuth();
   const token = authData.auth.accessToken;
 
-  // const [indexData, setIndexData] = useState("");
+  const [indexData, setIndexData] = useState([]);
 
   // useEffect(() => {
   //   setIndexData("");
   // }, []);
-
-  let indexData;
 
   axios
     .get(HISTORY_URL, {
@@ -27,11 +25,12 @@ function History() {
     })
     .then(function (response) {
       console.log(response.data);
-      indexData = response.data;
+      // indexData = response.data;
+      setIndexData(indexData);
     });
 
-  console.log("useauth(): ");
-  console.log(authData);
+  // console.log("useauth(): ");
+  // console.log(authData);
 
   return (
     <section className="flex mt-20">
