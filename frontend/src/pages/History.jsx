@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
@@ -8,34 +8,37 @@ const HISTORY_URL = "api/history/my-history";
 function History() {
   const authData = useAuth();
   const token = authData.auth.accessToken;
-  let data;
 
-  console.log("useauth(): ");
-  console.log(authData);
+  // const [indexData, setIndexData] = useState("");
 
-  console.log("token: ");
-  console.log(token);
+  // useEffect(() => {
+  //   setIndexData("");
+  // }, []);
 
-  try {
-    const response = axios.get(HISTORY_URL, {
+  let indexData;
+
+  axios
+    .get(HISTORY_URL, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
       withCredentials: true,
+    })
+    .then(function (response) {
+      console.log(response.data);
+      indexData = response.data;
     });
-    console.log("blaaa");
-    console.log(response);
-    data = response;
-  } catch (err) {
-    console.log(err);
-  }
+
+  console.log("useauth(): ");
+  console.log(authData);
 
   return (
     <section className="flex mt-20">
       <div className="m-auto">
         <h1>History</h1>
-        <div>{console.log(data)}</div>
+        <div>{console.log("indexData:::")}</div>
+        <div>{console.log(indexData)}</div>
       </div>
     </section>
   );
