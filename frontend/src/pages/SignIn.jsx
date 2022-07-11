@@ -1,13 +1,15 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import axios from "../api/axios";
+import { UserContext } from "../context/UserContext";
 
 const LOGIN_URL = "api/auth/login";
 
 const SignIn = () => {
   const { setAuth } = useAuth;
+  const [, setToken] = useContext(UserContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -38,11 +40,12 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(LOGIN_URL, data, headers);
-      console.log(JSON.stringify(response?.data));
-      console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      setAuth({ username, password, roles, accessToken });
+      // setAuth({ username, password, roles, accessToken });
+      // method with local storage (see usercontext.jsx)
+      setToken(accessToken);
+
       setUser("");
       setPwd("");
       navigate(from, { replace: true });
