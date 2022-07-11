@@ -8,8 +8,7 @@ import { UserContext } from "../context/UserContext";
 const LOGIN_URL = "api/auth/login";
 
 const SignIn = () => {
-  const { setAuth } = useAuth;
-  const [, setToken] = useContext(UserContext);
+  const { setAuth } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -40,12 +39,16 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(LOGIN_URL, data, headers);
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      // setAuth({ username, password, roles, accessToken });
-      // method with local storage (see usercontext.jsx)
-      setToken(accessToken);
+      // console.log(JSON.stringify(response?.data));
 
+      const accessToken = response.data.access_token;
+      const user_id = response.data.user_id;
+
+      // console.log("token");
+      // console.log(accessToken);
+      // const roles = response?.data?.roles;
+      const roles = [2001];
+      setAuth({ username, user_id, roles, accessToken });
       setUser("");
       setPwd("");
       navigate(from, { replace: true });

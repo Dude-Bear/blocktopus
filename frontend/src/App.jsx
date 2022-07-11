@@ -15,6 +15,12 @@ import BCI from "./pages/BCI";
 import PersonalIndex from "./pages/PersonalIndex";
 import Missing from "./pages/Missing";
 
+const ROLES = {
+  User: 2001,
+  Editor: 1984,
+  Admin: 5150,
+};
+
 function App() {
   const COINS_URL = "/api/coins";
 
@@ -52,9 +58,9 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
 
         {/* protected routes */}
-        {/* <Route element={<RequireAuth />}> */}
-        <Route path="/history" element={<History />} />
-        {/* </Route> */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+          <Route path="/history" element={<History />} />
+        </Route>
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />

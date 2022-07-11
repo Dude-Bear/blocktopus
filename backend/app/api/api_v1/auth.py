@@ -42,7 +42,11 @@ def login(
 
     access_token = auth.create_access_token(data={"user_id": user.user_id})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "user_id": user.user_id,
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
 
 
 @router.post(
