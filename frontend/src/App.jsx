@@ -13,8 +13,6 @@ import axios from "./api/axios";
 import { useEffect } from "react";
 import BCI from "./pages/BCI";
 import PersonalIndex from "./pages/PersonalIndex";
-import RequireAuth from "./components/RequireAuth";
-import Layout from "./components/Layout";
 import Missing from "./pages/Missing";
 
 function App() {
@@ -33,35 +31,33 @@ function App() {
     <ThemeProvider>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home topCoins={topCoins} />} />
-          <Route
-            path="/bci"
-            element={
-              <BCI
-                topCoins={topCoins}
-                setSelectedRows={setSelectedRows}
-                selectedRows={selectedRows}
-              />
-            }
-          />
-          <Route
-            path="/personal-index"
-            element={<PersonalIndex selectedRows={selectedRows} />}
-          />
-          <Route path="/Coin" element={<Coin />} />
-          <Route path="/learn" element={<Learn />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+        <Route path="/" element={<Home topCoins={topCoins} />} />
+        <Route
+          path="/bci"
+          element={
+            <BCI
+              topCoins={topCoins}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
+          }
+        />
+        <Route
+          path="/personal-index"
+          element={<PersonalIndex selectedRows={selectedRows} />}
+        />
+        <Route path="/Coin" element={<Coin />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
 
-          {/* protected routes */}
-          <Route element={<RequireAuth />}>
-            <Route path="/history" element={<History />} />
-          </Route>
+        {/* protected routes */}
+        {/* <Route element={<RequireAuth />}> */}
+        <Route path="/history" element={<History />} />
+        {/* </Route> */}
 
-          {/* catch all */}
-          <Route path="*" element={<Missing />} />
-        </Route>
+        {/* catch all */}
+        <Route path="*" element={<Missing />} />
       </Routes>
     </ThemeProvider>
   );
