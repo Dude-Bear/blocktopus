@@ -42,7 +42,11 @@ def login(
 
     access_token = auth.create_access_token(data={"user_id": user.user_id})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "user_id": user.user_id,
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
 
 
 @router.post(
@@ -62,7 +66,7 @@ def create_user(
     )
     if excisting_user:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_409_CONFLICT,
             detail="The user with this email already exists in the system",
         )
 

@@ -1,19 +1,28 @@
-import { AiFillLock, AiOutlineMail } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { UserAuth } from "../context/AuthContext";
 
 import { useRef, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import axios from "../api/axios";
+import { UserContext } from "../context/UserContext";
+
 import {
   faCheck,
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "../api/axios";
+
+// conts for jwt token with local storage
+const LOGIN_URL = "api/auth/login";
 
 const EMAIL_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}$/;
+// Minimum five characters, at least one letter and one number:
+// const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+
 const REGISTER_URL = "api/auth/signup";
 
 const SignUp = () => {
@@ -34,6 +43,12 @@ const SignUp = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
+  // conts for jwt token with local storage
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const [, setToken] = UserContext(UserContext);
 
   useEffect(() => {
     userRef.current.focus();
@@ -82,11 +97,46 @@ const SignUp = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
+      } else if (err.response?.status === 409) {
+        setErrMsg("A user with this email already exists ");
       } else {
         setErrMsg("Registration Failed");
       }
       errRef.current.focus();
     }
+
+    // Start
+    // Code for JWT authentication with local storage... maybe refactor later
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    };
+    const data = JSON.stringify(
+      `grant_type=&username=${user}&password=${pwd}&scope=&client_id=&client_secret=`
+    );
+
+    try {
+      const response = await axios.post(LOGIN_URL, data, headers);
+      const accessToken = response?.data?.accessToken;
+      // const roles = response?.data?.roles;
+      // setAuth({ username, password, roles, accessToken });
+      // method with local storage (see usercontext.jsx)
+      navigate(from, { replace: true });
+      setToken(accessToken);
+    } catch (err) {
+      console.log(err);
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errRef.current.focus();
+    }
+
+    // end
   };
 
   return (
@@ -109,7 +159,7 @@ const SignUp = () => {
           >
             {errMsg}
           </p>
-          <h1 className="text-2xl font-bold">SignUp</h1>
+          <h1 className="text-2xl font-bold">Sign Up</h1>
           <form onSubmit={handleSubmit}>
             <div className="my-4">
               <label htmlFor="email">
@@ -195,7 +245,7 @@ const SignUp = () => {
               </p>
             </div>
 
-            <div className="my-4">
+            <div className="my-2 w-full relative rounded-2xl shadow-xl">
               <label htmlFor="confirm_pwd">
                 Confirm Password:
                 <FontAwesomeIcon
@@ -231,7 +281,7 @@ const SignUp = () => {
             </div>
 
             <button
-              className="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+              className="w-full mt-6 p-3 bg-button text-btnText rounded-2xl shadow-xl"
               disabled={!validName || !validPwd || !validMatch ? true : false}
             >
               Sign Up

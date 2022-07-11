@@ -1,10 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import AuthContext from "../context/AuthProvider";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    // if used in more components, this should be in context
+    // axios to /logout endpoint
+    setAuth({});
+    navigate("/");
+  };
 
   const handleNav = () => {
     setNav(!nav);
@@ -29,6 +40,9 @@ const Navbar = () => {
       </div>
       <div className="hidden md:block">
         <ThemeToggle />
+      </div>
+      <div className="flexGrow">
+        <button onClick={logout}>LogOut</button>
       </div>
       <div className="hidden md:block">
         <Link to="/signin" className="p-4 hover:text-accent">
