@@ -1,5 +1,4 @@
-import { AiFillLock, AiOutlineMail } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { UserAuth } from "../context/AuthContext";
 
 import { useRef, useState, useEffect } from "react";
@@ -82,6 +81,8 @@ const SignUp = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
+      } else if (err.response?.status === 409) {
+        setErrMsg("A user with this email already exists ");
       } else {
         setErrMsg("Registration Failed");
       }
@@ -109,7 +110,7 @@ const SignUp = () => {
           >
             {errMsg}
           </p>
-          <h1 className="text-2xl font-bold">SignUp</h1>
+          <h1 className="text-2xl font-bold">Sign Up</h1>
           <form onSubmit={handleSubmit}>
             <div className="my-4">
               <label htmlFor="email">
@@ -195,7 +196,7 @@ const SignUp = () => {
               </p>
             </div>
 
-            <div className="my-4">
+            <div className="my-2 w-full relative rounded-2xl shadow-xl">
               <label htmlFor="confirm_pwd">
                 Confirm Password:
                 <FontAwesomeIcon
@@ -231,7 +232,7 @@ const SignUp = () => {
             </div>
 
             <button
-              className="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+              className="w-full mt-6 p-3 bg-button text-btnText rounded-2xl shadow-xl"
               disabled={!validName || !validPwd || !validMatch ? true : false}
             >
               Sign Up
