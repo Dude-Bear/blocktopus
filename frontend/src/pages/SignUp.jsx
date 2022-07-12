@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
-// import { UserAuth } from "../context/AuthContext";
-
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 
 import axios from "../api/axios";
-import { UserContext } from "../context/UserContext";
 
 import {
   faCheck,
