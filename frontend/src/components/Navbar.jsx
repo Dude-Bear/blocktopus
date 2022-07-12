@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import AuthContext from "../context/AuthProvider";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -16,6 +17,16 @@ const Navbar = () => {
     setAuth({});
     navigate("/");
   };
+
+  const authData = useAuth();
+
+  let loggedIn = false;
+
+  if (Object.entries(authData.auth).length === 0) {
+    loggedIn = false;
+  } else {
+    loggedIn = true;
+  }
 
   const handleNav = () => {
     setNav(!nav);
@@ -31,9 +42,9 @@ const Navbar = () => {
         <Link to="/bci" className="p-4 hover:text-accent">
           Index
         </Link>
-        <Link to="/learn" className="p-4 hover:text-accent">
+        {/* <Link to="/learn" className="p-4 hover:text-accent">
           Learn
-        </Link>
+        </Link> */}
         <Link to="/history" className="p-4 hover:text-accent">
           History
         </Link>
@@ -41,20 +52,25 @@ const Navbar = () => {
       <div className="hidden md:block">
         <ThemeToggle />
       </div>
-      <div className="flexGrow">
-        <button onClick={logout}>LogOut</button>
-      </div>
-      <div className="hidden md:block">
-        <Link to="/signin" className="p-4 hover:text-accent">
-          Sign In
-        </Link>
-        <Link
-          to="/signup"
-          className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
-        >
-          Sign Up
-        </Link>
-      </div>
+      {loggedIn ? (
+        <div className="hidden md:block">
+          <button
+            className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
+            onClick={logout}
+          >
+            LogOut
+          </button>
+        </div>
+      ) : (
+        <div className="hidden md:block">
+          <Link
+            to="/signin"
+            className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
+          >
+            Sign In
+          </Link>
+        </div>
+      )}
       {/* Icon for the Menu */}
       <div onClick={handleNav} className="block md:hidden cursor-pointer z-10">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -79,11 +95,11 @@ const Navbar = () => {
               Index
             </Link>
           </li>
-          <li className="border-b py-6">
+          {/* <li className="border-b py-6">
             <Link className="block" to="/learn">
               Learn
             </Link>
-          </li>
+          </li> */}
           <li className="border-b py-6">
             <Link className="block" to="/history">
               History
@@ -93,18 +109,24 @@ const Navbar = () => {
             <ThemeToggle className="block" />
           </li>
         </ul>
-        <div className="flex flex-col w-full p-4">
-          <Link to="/signin">
-            <button className="w-full my-2 p-3 bg-primary text-primary border border-secondary rounded-2xl shadow-xl">
-              Sign In
+        {loggedIn ? (
+          <div className="flex flex-col w-full p-4">
+            <button
+              className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl"
+              onClick={logout}
+            >
+              LogOut
             </button>
-          </Link>
-          <Link to="/signup">
-            <button className="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl">
-              Sign Up
-            </button>
-          </Link>
-        </div>
+          </div>
+        ) : (
+          <div className="flex flex-col w-full p-4">
+            <Link to="/signin">
+              <button className="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl">
+                Sign In
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

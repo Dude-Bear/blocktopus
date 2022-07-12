@@ -108,8 +108,8 @@ const SignIn = () => {
       </form>
       <p className="mt-4">
         Don't have an account?{" "}
-        <Link to="/signin" className="text-accent">
-          Sign in
+        <Link to="/signup" className="text-accent">
+          Sign Up
         </Link>
       </p>
     </section>
