@@ -58,7 +58,7 @@ def create_user(
     user_data_in: schemas.UserCreate,
 ) -> Any:
     """
-    Create new user without the need to be logged in.
+    Create a new user account.
     """
 
     excisting_user = (
