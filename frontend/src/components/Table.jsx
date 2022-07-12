@@ -267,7 +267,7 @@ function Table({ columns, data, onRowSelectStateChange }) {
           </div>
         </div>
       </div>
-      <pre>
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -277,7 +277,7 @@ function Table({ columns, data, onRowSelectStateChange }) {
             2
           )}
         </code>
-      </pre>
+      </pre> */}
     </>
   );
 }
