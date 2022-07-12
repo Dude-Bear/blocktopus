@@ -8,31 +8,18 @@ from .db.database import Base
 class Coin(Base):
     __tablename__ = "coins"
     coin_id = Column(Integer, primary_key=True, nullable=False)
+    index_id = Column(Integer, ForeignKey("indices.index_id", ondelete="CASCADE"))
+    id = Column(String(256), nullable=False)
     symbol = Column(String(256), nullable=False)
     name = Column(String(256), nullable=False)
     image = Column(String(256), nullable=False)
+    current_price = Column(Numeric, nullable=False)
+    market_cap = Column(Numeric, nullable=False)
+    proportion_invested = Column(Numeric, nullable=False)
+    personal_index_market_share = Column(Numeric, nullable=False)
     last_updated = Column(
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
-    circulating_supply = Column(Numeric, nullable=False)
-    market_cap = Column(Numeric, nullable=False)
-    current_price = Column(Numeric, nullable=False)
-
-
-class Consists_Of(Base):
-    __tablename__ = "consists_of"
-    coin_id = Column(
-        Integer,
-        ForeignKey("coins.coin_id", ondelete="CASCADE"),
-        primary_key=True,
-    )
-    index_id = Column(
-        Integer,
-        ForeignKey("indices.index_id", ondelete="CASCADE"),
-        primary_key=True,
-    )
-
-    amount_of_coin = Column(Numeric, nullable=False)
 
 
 class Index(Base):
@@ -45,6 +32,7 @@ class Index(Base):
         TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
     )
     index_name = Column(String(256), nullable=True, default="My Index")
+    total_investment = Column(Numeric, nullable=False)
 
 
 class User(Base):

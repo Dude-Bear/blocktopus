@@ -1,14 +1,16 @@
+from typing import List
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from pycoingecko import CoinGeckoAPI  # https://github.com/man-c/pycoingecko
 from app.utilities.calculations import add_mkt_share
+from app import schemas
 
 cg = CoinGeckoAPI()
 
 coins_router = router = APIRouter()
 
-# TODO: shema erstellen
-@router.get("/")
-async def get_top_X(number_of_coins="500"):
+
+@router.get("/", response_model=List[schemas.Coin])
+async def get_top_X(number_of_coins="250"):
     # get coindata from coingecko
     topX = cg.get_coins_markets(
         vs_currency="usd",
