@@ -29,6 +29,8 @@ origins = [
     "http://localhost:3000",
     "https://blocktopus-crypto-index.herokuapp.com/*",
     "https://blocktopus-crypto-index.herokuapp.com",
+    "https://blocktopus-backend.herokuapp.com/*",
+    "https://blocktopus-backend.herokuapp.com",
 ]
 
 app.add_middleware(
