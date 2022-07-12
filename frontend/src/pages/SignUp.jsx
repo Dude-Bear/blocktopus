@@ -37,12 +37,6 @@ const SignUp = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // // conts for jwt token with local storage
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
-  // const [, setToken] = UserContext(UserContext);
-
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -97,39 +91,6 @@ const SignUp = () => {
       }
       errRef.current.focus();
     }
-
-    // // Start
-    // // Code for JWT authentication with local storage... maybe refactor later
-    // const headers = {
-    //   "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-    // };
-    // const data = JSON.stringify(
-    //   `grant_type=&username=${user}&password=${pwd}&scope=&client_id=&client_secret=`
-    // );
-
-    // try {
-    //   const response = await axios.post(LOGIN_URL, data, headers);
-    //   const accessToken = response?.data?.accessToken;
-    //   // const roles = response?.data?.roles;
-    //   // setAuth({ username, password, roles, accessToken });
-    //   // method with local storage (see usercontext.jsx)
-    //   navigate(from, { replace: true });
-    //   setToken(accessToken);
-    // } catch (err) {
-    //   console.log(err);
-    //   if (!err?.response) {
-    //     setErrMsg("No Server Response");
-    //   } else if (err.response?.status === 400) {
-    //     setErrMsg("Missing Username or Password");
-    //   } else if (err.response?.status === 401) {
-    //     setErrMsg("Unauthorized");
-    //   } else {
-    //     setErrMsg("Login Failed");
-    //   }
-    //   errRef.current.focus();
-    // }
-
-    // // end
   };
 
   return (
