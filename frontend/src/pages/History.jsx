@@ -11,26 +11,19 @@ function History() {
 
   const [indexData, setIndexData] = useState([]);
 
-  // useEffect(() => {
-  //   setIndexData("");
-  // }, []);
-
-  axios
-    .get(HISTORY_URL, {
+  const getData = async () => {
+    const { data } = await axios.get(HISTORY_URL, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
       withCredentials: true,
-    })
-    .then(function (response) {
-      console.log(response.data);
-      // indexData = response.data;
-      setIndexData(indexData);
     });
-
-  // console.log("useauth(): ");
-  // console.log(authData);
+    setIndexData(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <section className="flex mt-20">
@@ -38,6 +31,7 @@ function History() {
         <h1>History</h1>
         <div>{console.log("indexData:::")}</div>
         <div>{console.log(indexData)}</div>
+        <div>{JSON.stringify(indexData)}</div>
       </div>
     </section>
   );
