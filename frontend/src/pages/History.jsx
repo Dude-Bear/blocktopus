@@ -14,10 +14,9 @@ function History() {
   const getData = async () => {
     const { data } = await axios.get(HISTORY_URL, {
       headers: {
-        "Content-Type": "application/json",
+        accept: "application/json",
         Authorization: "Bearer " + token,
       },
-      withCredentials: true,
     });
     setIndexData(data);
   };
