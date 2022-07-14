@@ -8,6 +8,8 @@ const PersonalIndex = (selectedRows) => {
   const columns = useMemo(() => COLUMNS, []);
   const location = useLocation();
 
+  const totalInvestment = location.state.data.amount;
+
   const data = selectedRows.selectedRows;
 
   for (let i of data) {
@@ -20,7 +22,10 @@ const PersonalIndex = (selectedRows) => {
       <div className="min-h-screen">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
           <div className="mt-3">
-            <SaveIndexBox selectedRows={selectedRows}></SaveIndexBox>
+            <SaveIndexBox
+              selectedRows={data}
+              totalInvestment={totalInvestment}
+            ></SaveIndexBox>
             <TableForPersonalIndex columns={columns} data={data} />
           </div>
         </main>

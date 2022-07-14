@@ -6,18 +6,14 @@ import axios from "../api/axios";
 
 const INDEX_URL = "api/index";
 
-const SaveIndexBox = (selectedRows) => {
+const SaveIndexBox = (data) => {
   let mkt = 0;
 
-  console.log("selectedRows");
-  console.log(selectedRows);
   try {
-    mkt = selectedRows.selectedRows.selectedRows[0].personal_index_market_cap;
+    mkt = data.selectedRows[0].personal_index_market_cap;
   } catch (error) {}
 
-  const dataForServer = selectedRows.selectedRows.selectedRows;
-  console.log("dataForServer");
-  console.log(dataForServer);
+  const dataForServer = data.selectedRows;
 
   const authData = useAuth();
   const token = authData.auth.accessToken;
@@ -29,7 +25,7 @@ const SaveIndexBox = (selectedRows) => {
       {
         user_id: userId,
         index_name: "My Index",
-        total_investment: 0,
+        total_investment: data.totalInvestment,
         list_of_coins: dataForServer,
       },
       {
