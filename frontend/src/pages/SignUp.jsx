@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const EMAIL_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}$/;
-// Minimum five characters, at least one letter and one number:
-// const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}$/;
+// Minimum five characters, maximum 24 characters, at least one letter and one number:
+const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,24}$/;
 
 const SIGNUP_URL = "api/auth/signup";
 
@@ -180,6 +180,17 @@ const SignUp = () => {
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
               />
+              {/* Tip for easy password: // Minimum five characters, maximum 24 characters, at least one letter and one number: */}
+              <p
+                id="pwdnote"
+                className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                5 to 24 characters.
+                <br />
+                Must include at least one letter and one number.
+              </p>
+              {/* Tip for hard password
               <p
                 id="pwdnote"
                 className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
@@ -196,7 +207,7 @@ const SignUp = () => {
                 <span aria-label="hashtag">#</span>{" "}
                 <span aria-label="dollar sign">$</span>{" "}
                 <span aria-label="percent">%</span>
-              </p>
+              </p> */}
             </div>
 
             <div className="my-2 w-full relative rounded-2xl shadow-xl">

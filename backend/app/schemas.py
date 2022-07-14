@@ -46,7 +46,7 @@ class Index(BaseModel):
 
 
 class History(BaseModel):
-    list_of_indizes: List[Index]
+    list_of_indizes: Optional[List[Index]]
 
     class Config:
         orm_mode = True
