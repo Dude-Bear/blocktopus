@@ -25,14 +25,16 @@ function History() {
   }, []);
 
   return (
-    <section className="flex mt-20">
-      <div className="m-auto">
-        <h1>History</h1>
-        <div>{console.log("indexData:::")}</div>
-        <div>{console.log(indexData)}</div>
-        <div>{JSON.stringify(indexData)}</div>
-      </div>
-    </section>
+    <div className="min-h-screen">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="mt-3">
+          <h1 className="text-4xl mt-0 mb-2">History</h1>
+          <p>
+            <div>{JSON.stringify(indexData)}</div>
+          </p>
+        </div>
+      </main>
+    </div>
   );
 }
 
