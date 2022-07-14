@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
+import axios from "../api/axios";
+
+const INDEX_URL = "api/index";
+
 const SaveIndexBox = (selectedRows) => {
   let mkt = 0;
 
@@ -20,29 +24,22 @@ const SaveIndexBox = (selectedRows) => {
   const userId = authData.auth.user_id;
 
   const sendData = async () => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const response = await axios.post(
+      INDEX_URL,
+      {
         user_id: userId,
         index_name: "My Index",
         total_investment: 0,
         list_of_coins: dataForServer,
-      }),
-    };
-    const response = await fetch(
-      "http://localhost:8000/api/index/",
-      requestOptions
+      },
+      {
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
     );
-    if (!response.ok) {
-      console.log("Something went wrong when creating index");
-    } else {
-      console.log("juhuuu");
-    }
   };
   return (
     <div className="w-80 m-auto mb-5">
