@@ -42,7 +42,7 @@ The [prototype](https://www.figma.com/proto/YGsZPC8MOaBuqyDl4GjkIW/Blocktopus?no
 --- 
 
 ## The Pitch Deck
-There is currently no running version of the Blocktopus web application, but below are some impressions from a pitch deck
+Below are some impressions from the pitch deck:
 
 <div>
 <img
